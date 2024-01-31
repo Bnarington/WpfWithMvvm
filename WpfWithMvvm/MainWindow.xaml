@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfWithMvvm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfWithMvvm"
+        xmlns:models ="clr-namespace:WpfWithMvvm.Mvvm.Models"
+        xmlns:viewmodels ="clr-namespace:WpfWithMvvm.Mvvm.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <Label Content="Company Name"/>
+            <TextBox Text="{Binding CustomerForm.CompanyName}" Padding=" 2,5" />
+            <Label Content="Contact person"/>
+            <TextBox Text="{Binding CustomerForm.ContactPerson}" Padding=" 2,5" />
+            <Button Content="Add Customer" Command="{Binding AddCustomerToListCommand}" Padding="0,5" Margin=" 10,10"/>
+        </StackPanel>
+
+        <ListView ItemsSource="{Binding CustomerList}" Grid.Row="1" HorizontalAlignment="Stretch" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding CompanyName}" />
+                            <TextBlock Text="{Binding ContactPerson}" />
+                        </StackPanel>
+
+                        <Button Grid.Column="1" Content="X" Width="21" Height="20" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Window>
